@@ -23,13 +23,12 @@ class ClassFeed(commands.Cog):
 
         announces = self.canvas.get_announcements([self.course.id])
         for ann in announces:
-            print("work1")
             # Read announcements have already been posted
             if ann.read_state == "read":
                 continue
-
+            
+            print("ANNOUNCEMENTS: Creating and sending announcement")
             soup = BeautifulSoup(ann.message, "html.parser")
-            print("work2")
             embed = discord.Embed(
                 title = f"{ann.title} ({ann.author['display_name']})",
                 url = ann.url,
@@ -43,11 +42,15 @@ class ClassFeed(commands.Cog):
             # Find channel in guilds
             for guild in self.bot.guilds:
                 ann_channel = discord.utils.get(guild.channels, name=self.announce_channel)
-                msg = await ann_channel.send(embed=embed)
-                print("work3")
+                await ann_channel.send(embed=embed)
+
+                # Curty's Disc
+                main_channel = discord.utils.get(guild.channels, id=840013593802178562)
+                await main)channel.send(embed=embed)
+
             # Mark announcement as read
             ann.mark_as_read()
-            print("work4")
+            print(f"ANNOUNCEMENTS: Sent \"{ann.title}\"")
 
     @commands.Cog.listener()
     async def on_ready(self):
