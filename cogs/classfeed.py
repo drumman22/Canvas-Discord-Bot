@@ -45,8 +45,12 @@ class ClassFeed(commands.Cog):
                 await ann_channel.send(embed=embed)
 
                 # Curty's Disc
-                main_channel = discord.utils.get(guild.channels, id=840013593802178562)
-                await main_channel.send(embed=embed)
+                try:
+                    main_channel = discord.utils.get(guild.channels, id=840013593802178562)
+                    await main_channel.send(embed=embed)
+                except:
+                    print("Channel doesn't exist in guild")
+
 
             # Mark announcement as read
             ann.mark_as_read()
