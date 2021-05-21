@@ -42,15 +42,13 @@ class ClassFeed(commands.Cog):
             # Find channel in guilds
             for guild in self.bot.guilds:
                 ann_channel = discord.utils.get(guild.channels, name=self.announce_channel)
-                await ann_channel.send(embed=embed)
+                if ann_channel:
+                    await ann_channel.send(embed=embed)
 
                 # Curty's Disc
-                try:
-                    main_channel = discord.utils.get(guild.channels, id=840013593802178562)
+                main_channel = discord.utils.get(guild.channels, id=840013593802178562)
+                if main_channel:
                     await main_channel.send(embed=embed)
-                except:
-                    print("Channel doesn't exist in guild")
-
 
             # Mark announcement as read
             ann.mark_as_read()
