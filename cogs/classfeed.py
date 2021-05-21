@@ -46,7 +46,7 @@ class ClassFeed(commands.Cog):
 
                 # Curty's Disc
                 main_channel = discord.utils.get(guild.channels, id=840013593802178562)
-                await main)channel.send(embed=embed)
+                await main_channel.send(embed=embed)
 
             # Mark announcement as read
             ann.mark_as_read()
